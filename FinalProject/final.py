@@ -1,5 +1,24 @@
+'''
+National Health and Nutrition Examination Survey (NHANES) Glossary:
 
-
+LBXGH       - Glycohemoglobin, the main biological marker to diagnose diabetes
+BMXWT       - Body weight
+BMXBMI      - Body Mass Index
+BMXWAIST    - Waist circumference
+BMXHT       - Body height
+BMXARMC     - Arm circumference
+BMDAVSAD    - Saggital abdominal measurement
+OHDEXSTS    - Overall oral health
+RIAGENDR    - Gender
+RIDAGEYR    - Age
+DR1TSUGR    - Sugar intake
+DR1TTFAT    - Fat intake
+DR1TSODI    - Sodium intake
+DR1TKCAL    - Calorie intake
+DR1TCARB    - Carbohydrate intake
+PAQ710      - How many hours spent watching TV
+PAQ715      - How many hours spent playing video games
+'''
 
 from sklearn import datasets
 import numpy as np
@@ -11,7 +30,6 @@ labs = pd.read_csv('labs.csv', usecols=['LBXGH'])
 exams = pd.read_csv('examination.csv', usecols=['BMXWT','BMXBMI','BMXWAIST','BMXHT','BMXARMC','BMDAVSAD','OHDEXSTS'])#
 gender =pd.read_csv('demographic.csv', usecols=['RIAGENDR'])
 age = pd.read_csv('demographic.csv', usecols=['RIDAGEYR'])
-#diet = pd.read_csv('diet.csv', usecols = np.arange(32,97,1))
 diet = pd.read_csv('diet.csv', usecols = ['DR1TSUGR','DR1TTFAT','DR1TSODI','DR1TKCAL','DR1TCARB',])
 survey = pd.read_csv('questionnaire.csv', usecols=['PAQ710','PAQ715'])
 
@@ -153,11 +171,7 @@ for index in range(0, 6):
 
 # Generate Heatmap to show correlation between elements
 import seaborn as sns
-#show = sns.pairplot(data, hue='A1C',size=1.5,diag_kind='kde')
-#show.set(xticklabels=[])
 import matplotlib.pyplot as plt
-import matplotlib as matplot
-
 colormap = plt.cm.viridis
 plt.figure(figsize=(20,20))
 sns.heatmap(data.astype(float).corr(), linewidths=0.1, vmax=1.0, square=True, cmap=colormap, annot=True)
